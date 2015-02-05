@@ -72,5 +72,38 @@ RSpec.describe CommentsController do
       expect(assigns(:comment)).to eq comment
     end
   end
+
+ # describe 'POST create' do
+  #  context 'with valid attributes' do
+   #   it 'saves a new comment' do
+    #    expect {
+     #     post :create, comment: valid_attributes
+      #  }.to change(Comment, :count).by 1
+      #end
+    #end
+  #end
+
+  describe 'GET edit' do
+    it 'has a 200 status code' do
+      article = Article.create!(title: 'Cows', body: 'They go moo')
+      comment = Comment.create!(body: 'Cats go moo', article_id: article)
+      get :edit, article_id: article, id: comment
+      expect(response.status).to eq 200
+    end
+
+    it 'renders the edit template' do
+      article = Article.create!(title: 'Cows', body: 'They go moo')
+      comment = Comment.create!(body: 'Cats go moo', article_id: article)
+      get :edit, article_id: article, id: comment
+      expect(response).to render_template('edit')
+    end
+
+    it 'assigns @comment' do
+      article = Article.create!(title: 'Cows', body: 'They go moo')
+      comment = Comment.create!(body: 'Cats go moo', article_id: article)
+      get :edit, article_id: article, id: comment
+      expect(assigns(:comment)).to eq comment
+    end
+  end
   
 end

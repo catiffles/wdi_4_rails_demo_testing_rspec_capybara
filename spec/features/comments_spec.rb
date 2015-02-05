@@ -37,6 +37,19 @@ RSpec.feature 'Managing comments' do
     expect(page).to have_content 'Cows go moo'
   end
 
+  scenario 'Update an comment' do
+    article = Article.create!(title: 'Cows', body: 'They go moo')
+    comment = Comment.create!(body: 'Cows go moo', article: article)
+
+    visit "/articles/#{article.id}/comments/#{comment.id}/edit"
+
+    fill_in 'Body', with: 'Cats do go moo'
+    click_on 'Update Comment'
+
+    expect(page).to have_content(/success/i)
+    expect(page).to have_content 'Cats do go moo'
+  end
+
 
 end
 
