@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+article = Article.create!(title: 'Cows', body: 'They go moo')
+another_article = Article.create!(title: 'Cats', body: 'They go meow')
+comment = Comment.create!([
+  {body: 'Cows go moo', article: article},
+  {body: 'Cats go meow', article: another_article},
+  {body: 'Cows go moo', article: article}
+])
